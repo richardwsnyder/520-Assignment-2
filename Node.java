@@ -36,7 +36,7 @@ class Node {
 		if(p != null)
 		{ 		
 			//     h(n)    +   g(n)
-			prio = priority + p.prio;
+			prio = priority + p.depth;
 			pathToNode = new String(p.pathToNode);
 			depth = p.depth + 1;
 		}
