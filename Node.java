@@ -11,6 +11,7 @@ class Node {
 	// next node for NodeQueue
 	Node next;
 	String pathToNode;
+	int depth;
 
 	public Node(Node p, State s) {
 		parent = p;
@@ -18,7 +19,10 @@ class Node {
 		children = new ArrayList<>();
 		hString = "";
 		if(p == null)
+		{
 			pathToNode = new String("Initial state -> ");
+			depth = 0;
+		}
 		else
 			pathToNode = new String(p.pathToNode);
 	}
@@ -32,14 +36,16 @@ class Node {
 		if(p != null)
 		{ 		
 			//     h(n)    +   g(n)
-			prio = priority + p.prio;
+			prio = priority + p.depth;
 			pathToNode = new String(p.pathToNode);
+			depth = p.depth + 1;
 		}
 
 		// if this is the root node, 
 		// it has a priority of 0
 		else
 		{
+			depth = 0;
 			prio = priority;
 			pathToNode = new String("Initial state -> ");
 		}
