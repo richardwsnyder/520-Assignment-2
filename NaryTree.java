@@ -12,8 +12,10 @@ class NaryTree {
 	}
 
 	// if a solution is found, print it to the file
-	public void printSolution(Node ans, FileWriter f) throws IOException {
+	public void printSolution(Node ans, FileWriter f, int counter) throws IOException {
 		f.write(ans.pathToNode + "solution\n");
+		f.write("The solution took " + ans.depth + " rotations of 30 degrees");
+		f.write("The solution expanded upon " + counter + " nodes.");
 		f.write("Solution takes the form of key (currentLattitude, currentLongitude): \n");
 		f.write(ans.currState.printState());
 		f.close();
@@ -29,7 +31,7 @@ class NaryTree {
 		// was passed in
 		if(n.currState.equals(goal))
 		{
-			printSolution(n, fileWriter);
+			printSolution(n, fileWriter, counter);
 			return;
 		}
 
@@ -65,7 +67,7 @@ class NaryTree {
 					// check to see if child is goal
 					if(x.currState.equals(goal))
 					{
-						printSolution(x, fileWriter);
+						printSolution(x, fileWriter, counter);
 						return;
 					}
 					frontier.add(x);
@@ -102,7 +104,7 @@ class NaryTree {
 			// check if found a solution
 			if(z.currState.equals(goal))
 			{
-				printSolution(n, fileWriter);
+				printSolution(n, fileWriter, counter);
 				return;
 			}
 			explored.add(z.hString);
